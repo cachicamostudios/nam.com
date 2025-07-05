@@ -1,8 +1,8 @@
 ---
-title: "First post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "2022-07-08"
-heroImage: "../../assets/blog-placeholder-3.jpg"
+title: "Título del post"
+author: "Nombre del autor"
+pubDate: 2025-xx-xx
+description: "Descripción del post"
 ---
 
 
