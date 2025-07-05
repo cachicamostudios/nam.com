@@ -1,86 +1,135 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, author } = Astro.props;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<html lang="es">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 100%;
+        margin: 0;
+      }
+      .hero-image {
+        width: 100%;
+      }
+      .hero-image img {
+        display: block;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+      }
+      .prose {
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding: 1em;
+        color: rgb(var(--gray-dark));
+      }
+      .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+        text-align: center;
+        line-height: 1;
+      }
+      .title h1 {
+        margin: 0 0 0.5em 0;
+      }
+      .date {
+        margin-bottom: 0.5em;
+        color: rgb(var(--gray));
+      }
+      .author {
+        font-weight: 400;
+        font-size: 1.1em;
+        margin-left: 8px;
+        color: #111;
+        opacity: 0.7;
+      }
+      .last-updated-on {
+        font-style: italic;
+      }
+    </style>
+  </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <a href="/" aria-label="Inicio ñam.com">
+          <img src="/logo.svg" alt="Logo neo-brutalista ñam.com" class="logo-img"/>
+        </a>
+      </div>
+      <div class="header-actions">
+        <button class="toggle-darkmode" id="toggle-dark">🌙/☀️</button>
+        <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">&#9776;</button>
+        <nav class="nav-menu" id="nav-menu">
+          <a href="/" class="nav-link">Inicio</a>
+          <a href="/about" class="nav-link">Sobre mí</a>
+          <a href="/archivo" class="nav-link">Archivo</a>
+          <a href="/galeria" class="nav-link">Galería</a>
+          <a href="/recetas" class="nav-link">Recetas</a>
+          <a href="https://t.me/+7CGABku_I01hYmRk" target="_blank" rel="noopener" class="nav-link">Telegram</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <article>
+        <div class="hero-image">
+          {heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+        </div>
+        <div class="prose">
+          <div class="title">
+            <div class="date">
+              <FormattedDate date={pubDate} />
+              {author && <span class="author"> · por {author}</span>}
+              {
+                updatedDate && (
+                  <div class="last-updated-on">
+                    Última actualización <FormattedDate date={updatedDate} />
+                  </div>
+                )
+              }
+            </div>
+            <h1>{title}</h1>
+            <hr />
+          </div>
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+    <script>
+      // Modo oscuro y menú hamburguesa
+      document.addEventListener('DOMContentLoaded', function () {
+        // Botón de modo oscuro
+        const toggleBtn = document.getElementById('toggle-dark');
+        toggleBtn && toggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('dark');
+        });
+
+        // Menú hamburguesa
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger && hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+        });
+
+        // Cierra el menú al hacer click fuera en móvil
+        document.addEventListener('click', function (event) {
+          if (navMenu && hamburger && !navMenu.contains(event.target) && !hamburger.contains(event.target)) {
+            navMenu.classList.remove('open');
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

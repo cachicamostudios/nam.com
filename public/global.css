@@ -1,0 +1,347 @@
+:root {
+  --bg: #fff;
+  --fg: #111;
+  --block-bg: #fff;
+  --block-shadow: #111;
+}
+
+body.dark {
+  --bg: #111;
+  --fg: #fff;
+  --block-bg: #181818;
+  --block-shadow: #fff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0 1rem 0;
+  position: relative;
+  z-index: 10;
+  background: var(--bg);
+}
+
+.logo {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 2rem;   /* Menos espacio a la izquierda */
+  margin-top: 0;        /* Quita margen arriba */
+}
+
+.logo-img {
+  width: 5.5rem;       /* Logo más pequeño y minimal */
+  height: auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 20;
+  padding-right: 2rem;  /* Espacio a la derecha */
+}
+
+.toggle-darkmode {
+  position: relative;
+  margin-right: 0;
+  margin-left: 0.3rem;
+  z-index: 1001;
+  background: none;
+  border: 3px solid var(--fg);
+  border-radius: 2rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--fg);
+  box-shadow: 4px 4px 0 var(--block-shadow);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.toggle-darkmode:hover {
+  background: var(--block-shadow);
+  color: var(--block-bg);
+  box-shadow: 0 0 0 var(--block-shadow);
+}
+
+.hamburger {
+  display: inline-block;
+  font-size: 2.5rem;
+  background: none;
+  border: 3px solid var(--fg);
+  border-radius: 1rem;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+  box-shadow: 3px 3px 0 var(--block-shadow);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  z-index: 1001;
+}
+
+.hamburger:hover {
+  background: var(--block-shadow);
+  color: var(--block-bg);
+  box-shadow: 0 0 0 var(--block-shadow);
+}
+
+.nav-menu {
+  position: absolute;
+  top: 3.2rem;
+  right: 0;
+  background: var(--block-bg);
+  border: 3px solid var(--block-shadow);
+  box-shadow: 8px 8px 0 var(--block-shadow);
+  border-radius: 1.5rem;
+  display: none;
+  flex-direction: column;
+  min-width: 180px;
+  padding: 1rem 0.5rem;
+  gap: 1rem;
+  z-index: 1002;
+}
+
+.nav-menu.open {
+  display: flex;
+}
+
+.nav-link {
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0.7rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+  background: var(--block-shadow);
+  color: var(--block-bg);
+}
+
+.main-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin-bottom: 2rem;
+  border-left: 8px solid var(--fg);
+  padding-left: 1rem;
+}
+
+.post-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.post-block {
+  display: block;
+  padding: 2rem;
+  border: 4px solid var(--block-shadow);
+  border-radius: 1.5rem;
+  background: var(--block-bg);
+  box-shadow: 8px 8px 0 var(--block-shadow);
+  transition: box-shadow 0.2s, transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.post-block:hover {
+  box-shadow: 0 0 0 var(--block-shadow);
+  transform: translate(6px, 6px);
+  background: #f4f4f4;
+  color: var(--fg);
+}
+
+.post-block h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.post-block p {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.post-date {
+  font-size: 0.85rem;
+  color: #777;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-family: monospace;
+}
+
+.no-posts {
+  text-align: center;
+  opacity: 0.7;
+  font-size: 1.2rem;
+}
+
+/* Responsive: todo se adapta en móvil */
+@media (max-width: 600px) {
+  .main-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .logo {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 0.3rem;
+  }
+  .header-actions {
+    justify-content: flex-end;
+    gap: 0.7rem;
+    padding-right: 0.5rem;
+  }
+  .nav-menu {
+    right: 0.5rem;
+    left: auto;
+    top: 3.7rem;
+  }
+  .main-container {
+    padding: 1rem 0.3rem;
+  }
+  h1 {
+    font-size: 2.1rem;
+    border-left-width: 5px;
+    padding-left: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+  .post-block {
+    padding: 1.1rem;
+    font-size: 0.98rem;
+    border-radius: 1rem;
+  }
+}
+.main-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 4rem;
+  padding: 2.5rem 2rem 2.5rem 2rem;
+  border-top: 4px solid var(--block-shadow);
+  background: var(--block-bg);
+  font-size: 1.08rem;
+  box-shadow: 0 -6px 0 var(--block-shadow);
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 200px;
+}
+
+.footer-copy {
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-size: 1.06rem;
+  color: var(--fg);
+}
+
+.footer-madeby {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.footer-heart {
+  color: #eb2646;
+  font-size: 1.08rem;
+  vertical-align: middle;
+}
+
+.footer-contact {
+  font-size: 1rem;
+  color: var(--fg);
+}
+
+.footer-contact a {
+  color: var(--fg);
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.footer-contact a:hover {
+  color: var(--block-shadow);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+..footer-links-row {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-top: 0.6rem;
+  margin-bottom: 0;
+}
+
+.footer-link {
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.11rem;
+  letter-spacing: 0;
+  padding: 0.2rem 0.7rem;
+  border-radius: 0.6rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer-link:hover {
+  background: var(--block-shadow);
+  color: var(--block-bg);
+}
+
+/* Footer responsivo: en móvil los links van abajo y en columna */
+@media (max-width: 600px) {
+  .main-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.3rem;
+    padding: 2rem 0.7rem 2rem 0.7rem;
+    font-size: 0.98rem;
+  }
+  .footer-links-row {
+    justify-content: flex-start;
+    gap: 1.1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+}

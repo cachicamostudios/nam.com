@@ -1,49 +1,105 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ñam.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/global.css" />
+  </head>
+  <body>
+    <header class="main-header">
+		<div class="logo">
+    <a href="/" aria-label="Inicio ñam.com">
+      <img src="/logo.svg" alt="Logo neo-brutalista ñam.com" class="logo-img"/>
+    </a>
+  </div>
+      <div class="logo">ñam.com</div>
+      <div class="header-actions">
+        <button class="toggle-darkmode" id="toggle-dark">🌙/☀️</button>
+        <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">&#9776;</button>
+        <nav class="nav-menu" id="nav-menu">
+          <a href="/" class="nav-link">Inicio</a>
+          <a href="/about" class="nav-link">Sobre mí</a>
+          <a href="/archivo" class="nav-link">Archivo</a>
+          <a href="/galeria" class="nav-link">Galería</a>
+          <a href="/recetas" class="nav-link">Recetas</a>
+		  <!-- Más enlaces aquí -->
+        </nav>
+      </div>
+    </header>
+    <main class="main-container">
+      <div class="post-blocks">
+        {posts.length === 0 && (
+          <div class="no-posts">
+            <p>No hay posts aún. ¡Crea tu primer post en <code>src/content/blog/</code>!</p>
+          </div>
+        )}
+        {posts.map(post => (
+          <a href={`/blog/${post.id}/`} class="post-block">
+            <h2>{post.data.title ?? 'Sin título'}</h2>
+            <p>{post.data.description ?? ''}</p>
+            <span class="post-date">{post.data.pubDate ?? ''}</span>
+          </a>
+        ))}
+      </div>
+    </main>
+	<footer class="main-footer">
+  <div class="footer-col">
+    <div class="footer-copy">© 2025 ñam.com.<br>Todos los derechos reservados.</div>
+    <div class="footer-madeby">
+      Hecho con <span class="footer-heart">♡</span> por CACHICAMO STUDIOS LLC
+    </div>
+    <div class="footer-contact">
+      Contacto:
+      <a href="https://t.me/+7CGABku_I01hYmRk" target="_blank" rel="noopener" class="footer-icon-link">
+        <img src="/telegram-logo.svg" alt="Telegram" class="footer-icon"/>
+        Telegram
+      </a>
+    </div>
+  </div>
+  <div class="footer-links-row">
+    <a href="/" class="footer-link">Inicio</a>
+    <a href="/about" class="footer-link">Sobre mí</a>
+    <a href="https://t.me/+7CGABku_I01hYmRk" target="_blank" rel="noopener" class="footer-link">Telegram</a>
+    <a href="https://instagram.com/TU_INSTAGRAM" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+  </div>
+</footer>
+
+
+    <script>
+      // Modo oscuro brutalista
+      if (localStorage.getItem('dark') === '1') {
+        document.body.classList.add('dark');
+      }
+      document.getElementById('toggle-dark').onclick = () => {
+        document.body.classList.toggle('dark');
+        if (document.body.classList.contains('dark')) {
+          localStorage.setItem('dark', '1');
+        } else {
+          localStorage.removeItem('dark');
+        }
+      };
+
+      // Menú hamburguesa brutalista
+      const btn = document.getElementById('hamburger-btn');
+      const nav = document.getElementById('nav-menu');
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        nav.classList.toggle('open');
+      };
+      // Cierra el menú si se hace click fuera o en un enlace
+      window.onclick = e => {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('open');
+        }
+      };
+      nav.querySelectorAll('.nav-link').forEach(link => {
+        link.onclick = () => nav.classList.remove('open');
+      });
+    </script>
+  </body>
 </html>

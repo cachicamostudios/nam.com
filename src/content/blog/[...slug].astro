@@ -1,0 +1,25 @@
+---
+import { getEntryBySlug } from "astro:content";
+import { Markdown } from "astro/components";
+const { slug } = Astro.params;
+const entry = await getEntryBySlug("blog", slug.join("/"));
+if (!entry) throw new Error(`Entry not found for slug: ${slug.join("/")}`);
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{entry.data.title} – ñam.com</title>s
+    <link rel="stylesheet" href="/global.css" />
+  </head>
+  <body>
+    <main class="main-container">
+      <a href="/" style="text-decoration:none;">← Volver</a>
+      <h1>{entry.data.title}</h1>
+      <p class="post-date">{entry.data.pubDate}</p>
+      <article>
+        <Markdown content={entry.body} />
+      </article>
+    </main>
+  </body>
+</html>
