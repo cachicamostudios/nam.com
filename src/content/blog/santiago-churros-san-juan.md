@@ -7,13 +7,13 @@ description: "Una historia azucarada entre tradición y chocolate en las calles 
 
 Hay un instante, apenas perceptible, en el que la bruma matinal de Santiago de Compostela se quita el impermeable de lluvia y se viste con un perfume dulce y tibio: el olor a churros recién hechos y a chocolate cremoso y espeso. Esa señal olfativa anuncia que el solsticio se acerca y que la ciudad está a punto de prender hogueras, entonar conxuros y dejarse conquistar por la gula en la noche más corta del año, la de **San Juan**.
 
-La jornada comienza antes de que las campanas de la Berenguela marquen las seis. Los maestros churreros calientan calderos de aceite en puestos ambulantes repartidos por el casco histórico —de Porta Faxeira a la Praza de Cervantes—. El crepitar de la fritura se mezcla con el canto de los gorriones y, poco a poco, una alfombra de azúcar glacé va cubriendo el empedrado. No importa si eres peregrino, vecino o estudiante trasnochador: ese olor actúa como hilo de Ariadna y te conduce, con el estómago por brújula, hasta el primer cucurucho.
+La jornada comienza antes de que las campanas de la Berenguela marquen las seis. Los maestros churreros calientan calderos de aceite en puestos ambulantes repartidos por el casco histórico de Porta Faxeira a la Praza de Cervantes. El crepitar de la fritura se mezcla con el canto de los gorriones y, poco a poco, una alfombra de azúcar glacé va cubriendo el empedrado. No importa si eres peregrino, vecino o estudiante trasnochador: ese olor actúa como hilo de Ariadna y te conduce, con el estómago por brújula, hasta el primer cucurucho.
 
 El churro viajó a la península con los pastores castellanos como alternativa portátil al pan, mientras que el cacao cruzó el Atlántico en las bodegas de los galeones del siglo XVI. Se conocieron en las chocolaterías madrileñas hacia 1800, pero fue en Galicia donde su idilio se consagró: el clima húmedo invitaba a platos calientes y la tradición repostera los acogió sin reservas. Desde entonces, la pareja **churro‑chocolate** es indivisible en cualquier verbena que se precie.
 
 El 23 de junio, cuando el sol se esconde tras el Monte Pedroso, los compostelanos encienden docenas de **cacharelas** (hogueras) para purificarse saltando sobre las llamas y recitar el mítico *Conxuro da Queimada* contra las meigas. Entre chispas y olor a eucalipto, las filas frente a los puestos de churros crecen como espigas. Comer algo dulce antes y después de brincar el fuego es casi un rito de protección adicional: el azúcar espanta los malos espíritus tanto como la lumbre.
 
-## ¿Dónde? Rincones churretosos (peca sin remordimientos)
+## Rincones churretosos (peca sin remordimientos)
 
 - **Churrería de San Pedro** (Rúa de San Pedro, 42)\
   Funde tradición y vistas a la Porta do Camiño. Su chocolate, denso como un sermón franciscano, se sirve en tazas de loza blanca que queman las manos y calientan el alma.
@@ -27,7 +27,7 @@ El 23 de junio, cuando el sol se esconde tras el Monte Pedroso, los compostelano
 - **Puesto de Doña Aurelia** (itinerante)\
   Sin dirección fija; sigue la música de las gaitas y encontrarás su carrito rojo. Doña Aurelia fríe los churros en aceite de oliva y los espolvorea con azúcar de vainilla.
 
-## ¿Cómo? Receta casera para valientes… o impacientes
+## Receta casera para valientes… o impacientes
 
 *Rinde 4 porciones generosas*
 
