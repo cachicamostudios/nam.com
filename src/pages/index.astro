@@ -1,6 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
+
+// Ordenar por fecha descendente (más nuevo primero)
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
+);
 ---
 
 <html lang="es">
@@ -12,12 +17,11 @@ const posts = await getCollection('blog');
   </head>
   <body>
     <header class="main-header">
-		<div class="logo">
-    <a href="/" aria-label="Inicio ñam.com">
-      <img src="/logo.svg" alt="Logo neo-brutalista ñam.com" class="logo-img"/>
-    </a>
-  </div>
-      <div class="logo">ñam.com</div>
+      <div class="logo">
+        <a href="/" aria-label="Inicio ñam.com">
+          <img src="/logo.svg" alt="Logo neo-brutalista ñam.com" class="logo-img"/>
+        </a>
+      </div>
       <div class="header-actions">
         <button class="toggle-darkmode" id="toggle-dark">🌙/☀️</button>
         <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">&#9776;</button>
@@ -27,18 +31,18 @@ const posts = await getCollection('blog');
           <a href="/archivo" class="nav-link">Archivo</a>
           <a href="/galeria" class="nav-link">Galería</a>
           <a href="/recetas" class="nav-link">Recetas</a>
-		  <!-- Más enlaces aquí -->
+          <!-- Más enlaces aquí -->
         </nav>
       </div>
     </header>
     <main class="main-container">
       <div class="post-blocks">
-        {posts.length === 0 && (
+        {sortedPosts.length === 0 && (
           <div class="no-posts">
             <p>No hay posts aún. ¡Crea tu primer post en <code>src/content/blog/</code>!</p>
           </div>
         )}
-        {posts.map(post => (
+        {sortedPosts.map(post => (
           <a href={`/blog/${post.id}/`} class="post-block">
             <h2>{post.data.title ?? 'Sin título'}</h2>
             <p>{post.data.description ?? ''}</p>
@@ -47,29 +51,27 @@ const posts = await getCollection('blog');
         ))}
       </div>
     </main>
-	<footer class="main-footer">
-  <div class="footer-col">
-    <div class="footer-copy">© 2025 ñam.com.<br>Todos los derechos reservados.</div>
-    <div class="footer-madeby">
-      Hecho con <span class="footer-heart">♡</span> por CACHICAMO STUDIOS LLC
-    </div>
-    <div class="footer-contact">
-      Contacto:
-      <a href="https://t.me/+7CGABku_I01hYmRk" target="_blank" rel="noopener" class="footer-icon-link">
-        <img src="/telegram-logo.svg" alt="Telegram" class="footer-icon"/>
-        Telegram
-      </a>
-    </div>
-  </div>
-  <div class="footer-links-row">
-    <a href="/" class="footer-link">Inicio</a>
-    <a href="/about" class="footer-link">Sobre mí</a>
-    <a href="https://t.me/+7CGABku_I01hYmRk" target="_blank" rel="noopener" class="footer-link">Telegram</a>
-    <a href="https://instagram.com/TU_INSTAGRAM" target="_blank" rel="noopener" class="footer-link">Instagram</a>
-  </div>
-</footer>
-
-
+    <footer class="main-footer">
+      <div class="footer-col">
+        <div class="footer-copy">© 2025 ñam.com.<br/>Todos los derechos reservados.</div>
+        <div class="footer-madeby">
+          Hecho con <span class="footer-heart">♡</span> por CACHICAMO STUDIOS LLC
+        </div>
+        <div class="footer-contact">
+          Contacto:
+          <a href="https://t.me/+7CGABku_I01hYmRk" target="_blank" rel="noopener" class="footer-icon-link">
+            <img src="/telegram-logo.svg" alt="Telegram" class="footer-icon"/>
+            Telegram
+          </a>
+        </div>
+      </div>
+      <div class="footer-links-row">
+        <a href="/" class="footer-link">Inicio</a>
+        <a href="/about" class="footer-link">Sobre mí</a>
+        <a href="https://t.me/+7CGABku_I01hYmRk" target="_blank" rel="noopener" class="footer-link">Telegram</a>
+        <a href="https://instagram.com/TU_INSTAGRAM" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+      </div>
+    </footer>
     <script>
       // Modo oscuro brutalista
       if (localStorage.getItem('dark') === '1') {
