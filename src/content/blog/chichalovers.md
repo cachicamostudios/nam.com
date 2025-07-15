@@ -1,5 +1,5 @@
 ---
-title: "Chichalovers: una ventana de chicharrón que huele a Galicia"
+title: "Chichalovers: la ventana más sabrosa de Santiago"
 author: "Susana Gomes"
 pubDate: 2025-07-15
 description: "En la Rúa de Aller Ulloa, una pequeña ventana sirve los bocatas más sabrosos de chicharrón gallego. Esta es la historia de Chichalovers: cocina invisible, sabor inolvidable."
