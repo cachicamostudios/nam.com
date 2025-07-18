@@ -1,0 +1,16 @@
+<svg width="220" height="240" viewBox="0 0 220 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Globo brutalista -->
+  <ellipse cx="110" cy="110" rx="88" ry="88" stroke="black" stroke-width="6" fill="white"></ellipse>
+  <!-- Meridianos y paralelos -->
+  <ellipse cx="110" cy="110" rx="60" ry="88" stroke="black" stroke-width="4" fill="none"></ellipse>
+  <ellipse cx="110" cy="110" rx="88" ry="30" stroke="black" stroke-width="4" fill="none"></ellipse>
+  <ellipse cx="110" cy="110" rx="80" ry="20" stroke="black" stroke-width="3" fill="none"></ellipse>
+  <ellipse cx="110" cy="110" rx="88" ry="14" stroke="black" stroke-width="3" fill="none"></ellipse>
+  <!-- Estrella neo-brutalista -->
+  <polygon points="180,52 185,70 200,70 188,80 193,98 180,88 167,98 172,80 160,70 175,70" fill="black"></polygon>
+  <!-- Texto brutalista encima -->
+  <text x="50%" y="120" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="bold" fill="black" stroke="white" stroke-width="7" paint-order="stroke">ñam!</text>
+  <text x="50%" y="120" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="bold" fill="black">ñam!</text>
+  <!-- Est. 2025 más abajo -->
+  <text x="50%" y="228" text-anchor="middle" font-family="monospace" font-size="14" fill="black">Est. 2025</text>
+</svg>
