@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -18,8 +20,8 @@ const slug = post.data.galeria;
 // Cargar lista de fotos desde el JSON de la galería
 let fotos: string[] = [];
 try {
-  const res = await fetch(`${Astro.site}galeria/${slug}/fotos.json`);
-  fotos = await res.json();
+  const jsonPath = resolve('public/galeria', slug!, 'fotos.json');
+  fotos = JSON.parse(readFileSync(jsonPath, 'utf-8'));
 } catch (e) {
   fotos = [];
 }
@@ -27,7 +29,7 @@ try {
 
 <Base title={`Galería: ${post.data.title} | ñam.com`}>
   <div class="galeria-header">
-    <a href={`/blog/${post.id}`} class="btn-volver">← Volver al post</a>
+    <a href={`/${post.id}`} class="btn-volver">← Volver al post</a>
     <h1>📷 {post.data.title}</h1>
   </div>
 
