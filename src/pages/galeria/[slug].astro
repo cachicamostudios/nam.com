@@ -36,14 +36,30 @@ try {
   {fotos.length === 0 ? (
     <p class="sin-fotos">No hay fotos aún en esta galería.</p>
   ) : (
-    <div class="galeria-grid">
-      {fotos.map((foto) => (
-        <a href={`/galeria/${slug}/${foto}`} target="_blank" rel="noopener" class="galeria-item">
-          <img src={`/galeria/${slug}/${foto}`} alt={foto} loading="lazy" />
-        </a>
+    <div class="galeria-grid" id="galeria-grid">
+      {fotos.map((foto, i) => (
+        <button
+          class="galeria-item"
+          data-index={i}
+          data-src={`/galeria/${slug}/${foto}`}
+          aria-label={`Ver foto ${i + 1}`}
+        >
+          <img src={`/galeria/${slug}/${foto}`} alt={`Foto ${i + 1}`} loading="lazy" />
+        </button>
       ))}
     </div>
   )}
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos">
+    <button class="lb-cerrar" id="lb-cerrar" aria-label="Cerrar">✕</button>
+    <button class="lb-nav lb-prev" id="lb-prev" aria-label="Foto anterior">&#8592;</button>
+    <div class="lb-img-wrap" id="lb-img-wrap">
+      <img id="lb-img" src="" alt="Foto ampliada" />
+    </div>
+    <button class="lb-nav lb-next" id="lb-next" aria-label="Foto siguiente">&#8594;</button>
+    <div class="lb-contador" id="lb-contador"></div>
+  </div>
 </Base>
 
 <style>
@@ -68,6 +84,14 @@ try {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1rem;
   }
+  .galeria-item {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+  }
   .galeria-item img {
     width: 100%;
     aspect-ratio: 1;
@@ -75,13 +99,179 @@ try {
     border-radius: 0.7rem;
     border: 3px solid var(--fg, #111);
     box-shadow: 4px 4px 0 var(--fg, #111);
-    transition: box-shadow 0.15s;
+    transition: box-shadow 0.15s, transform 0.15s;
+    display: block;
   }
-  .galeria-item img:hover {
+  .galeria-item:hover img {
     box-shadow: 2px 2px 0 var(--fg, #111);
+    transform: scale(1.02);
   }
   .sin-fotos {
     color: #888;
     font-style: italic;
   }
+
+  /* ── Lightbox ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .lightbox.open {
+    display: flex;
+  }
+  .lb-img-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100vh;
+    padding: 3.5rem 0.5rem 2.5rem;
+    box-sizing: border-box;
+  }
+  #lb-img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 0.7rem;
+    box-shadow: 0 0 40px rgba(0,0,0,0.7);
+    user-select: none;
+  }
+  .lb-cerrar {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    cursor: pointer;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    transition: background 0.15s;
+  }
+  .lb-cerrar:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  .lb-nav {
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.4);
+    color: #fff;
+    font-size: 1.8rem;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0 0.5rem;
+    transition: background 0.15s;
+    z-index: 10001;
+  }
+  .lb-nav:hover {
+    background: rgba(255,255,255,0.28);
+  }
+  .lb-contador {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .lb-nav {
+      width: 2.4rem;
+      height: 2.4rem;
+      font-size: 1.3rem;
+      margin: 0 0.2rem;
+    }
+    #lb-img {
+      max-width: 95vw;
+      max-height: 75vh;
+    }
+  }
 </style>
+
+<script>
+  const lightbox = document.getElementById('lightbox')!;
+  const lbImg = document.getElementById('lb-img') as HTMLImageElement;
+  const lbContador = document.getElementById('lb-contador')!;
+  const btnCerrar = document.getElementById('lb-cerrar')!;
+  const btnPrev = document.getElementById('lb-prev')!;
+  const btnNext = document.getElementById('lb-next')!;
+  const lbImgWrap = document.getElementById('lb-img-wrap')!;
+
+  // Recoger todas las fotos del grid
+  const items = Array.from(document.querySelectorAll<HTMLButtonElement>('.galeria-item'));
+  const srcs = items.map(el => el.dataset.src!);
+  let current = 0;
+
+  function abrir(index: number) {
+    current = index;
+    mostrar();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function cerrar() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function mostrar() {
+    lbImg.src = srcs[current];
+    lbContador.textContent = `${current + 1} / ${srcs.length}`;
+    btnPrev.style.visibility = srcs.length > 1 ? 'visible' : 'hidden';
+    btnNext.style.visibility = srcs.length > 1 ? 'visible' : 'hidden';
+  }
+
+  function prev() {
+    current = (current - 1 + srcs.length) % srcs.length;
+    mostrar();
+  }
+
+  function next() {
+    current = (current + 1) % srcs.length;
+    mostrar();
+  }
+
+  // Abrir al hacer click en miniatura
+  items.forEach((item, i) => {
+    item.addEventListener('click', () => abrir(i));
+  });
+
+  // Botones del lightbox
+  btnCerrar.addEventListener('click', cerrar);
+  btnPrev.addEventListener('click', prev);
+  btnNext.addEventListener('click', next);
+
+  // Click en el fondo (fuera de la imagen) cierra
+  lbImgWrap.addEventListener('click', (e) => {
+    if (e.target === lbImgWrap) cerrar();
+  });
+
+  // Teclado: Escape cierra, flechas navegan
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') cerrar();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+</script>
