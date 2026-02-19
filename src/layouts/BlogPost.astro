@@ -80,6 +80,22 @@ const { title, description, pubDate, updatedDate, heroImage, author, galeria } =
         border-radius: 0.5em;
         cursor: pointer;
       }
+      .btn-galeria {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 0.8rem 1.6rem;
+        background: #111;
+        color: #fff;
+        font-weight: 800;
+        font-size: 1rem;
+        border-radius: 0.7rem;
+        text-decoration: none;
+        box-shadow: 4px 4px 0 #888;
+        transition: box-shadow 0.15s;
+      }
+      .btn-galeria:hover {
+        box-shadow: 2px 2px 0 #888;
+      }
       @media (max-width: 480px) {
         .title h1 {
           font-size: 1.6rem;
@@ -146,6 +162,11 @@ const { title, description, pubDate, updatedDate, heroImage, author, galeria } =
             <hr />
           </div>
           <slot />
+          {galeria && (
+            <a href={`/galeria/${galeria}`} class="btn-galeria">
+              📷 Ver galería
+            </a>
+          )}
         </div>
       </article>
     </main>
