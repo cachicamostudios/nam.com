@@ -184,8 +184,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "12aa2cc8b18210a7",
+  "active": "56da9585943885f3",
   "lastOpenFiles": [
+    "src/pages/galeria/[slug].astro",
+    "src/pages/galeria",
     "src/content/blog/archivo",
     "src/content/blog/Untitled.md",
     "src/content/blog/Test.md"

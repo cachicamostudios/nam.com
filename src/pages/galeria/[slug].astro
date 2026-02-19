@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter(post => post.data.galeria)
+    .map(post => ({
+      params: { slug: post.data.galeria },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const slug = post.data.galeria;
+
+// Cargar lista de fotos desde el JSON de la galería
+let fotos: string[] = [];
+try {
+  const res = await fetch(`${Astro.site}galeria/${slug}/fotos.json`);
+  fotos = await res.json();
+} catch (e) {
+  fotos = [];
+}
+---
+
+<Base title={`Galería: ${post.data.title} | ñam.com`}>
+  <div class="galeria-header">
+    <a href={`/blog/${post.id}`} class="btn-volver">← Volver al post</a>
+    <h1>📷 {post.data.title}</h1>
+  </div>
+
+  {fotos.length === 0 ? (
+    <p class="sin-fotos">No hay fotos aún en esta galería.</p>
+  ) : (
+    <div class="galeria-grid">
+      {fotos.map((foto) => (
+        <a href={`/galeria/${slug}/${foto}`} target="_blank" rel="noopener" class="galeria-item">
+          <img src={`/galeria/${slug}/${foto}`} alt={foto} loading="lazy" />
+        </a>
+      ))}
+    </div>
+  )}
+</Base>
+
+<style>
+  .galeria-header {
+    margin-bottom: 2rem;
+  }
+  .btn-volver {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--fg);
+    font-size: 1rem;
+  }
+  .btn-volver:hover {
+    text-decoration: underline;
+  }
+  h1 {
+    margin-top: 0.5rem;
+    font-size: 1.8rem;
+  }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .galeria-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 0.7rem;
+    border: 3px solid var(--fg, #111);
+    box-shadow: 4px 4px 0 var(--fg, #111);
+    transition: box-shadow 0.15s;
+  }
+  .galeria-item img:hover {
+    box-shadow: 2px 2px 0 var(--fg, #111);
+  }
+  .sin-fotos {
+    color: #888;
+    font-style: italic;
+  }
+</style>

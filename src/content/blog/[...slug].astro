@@ -20,6 +20,29 @@ if (!entry) throw new Error(`Entry not found for slug: ${slug.join("/")}`);
       <article>
         <Markdown content={entry.body} />
       </article>
+      {entry.data.galeria && (
+        <a href={`/galeria/${entry.data.galeria}`} class="btn-galeria">
+          📷 Ver galería
+        </a>
+      )}
     </main>
   </body>
 </html>
+<style>
+  .btn-galeria {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.6rem;
+    background: var(--fg, #111);
+    color: var(--bg, #fff);
+    font-weight: 800;
+    font-size: 1rem;
+    border-radius: 0.7rem;
+    text-decoration: none;
+    box-shadow: 4px 4px 0 #888;
+    transition: box-shadow 0.15s;
+  }
+  .btn-galeria:hover {
+    box-shadow: 2px 2px 0 #888;
+  }
+</style>
