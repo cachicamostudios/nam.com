@@ -1,8 +1,9 @@
 ---
 title: "Chichalovers: la ventana más sabrosa de Santiago"
-author: "Susana Gomes"
+author: Susana Gomes
 pubDate: 2025-07-15
 description: "En la Rúa de Aller Ulloa, una pequeña ventana sirve los bocatas más sabrosos de chicharrón gallego. Esta es la historia de Chichalovers: cocina invisible, sabor inolvidable."
+galeria: chichalovers
 ---
 
 Un local diminuto, sin cartel ni fachada llamativa, que sirve a través de una ventana algunos de los bocatas de chicharrón más sabrosos de toda Galicia. Así es **Chichalovers**, un establecimiento que eleva el cerdo a categoría de arte comestible y convierte el chicharrón en su estandarte.
