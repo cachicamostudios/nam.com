@@ -1,8 +1,100 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const recetas = (await getCollection('recetas')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <Base title="Recetas | ñam.com">
-  <h1>Recetas</h1>
-  <p>Recopilación de recetas deliciosas y experimentos gastronómicos de ñam.com.</p>
+  <h1>🍳 Recetas</h1>
+  <p class="recetas-desc">Recopilación de recetas deliciosas y experimentos gastronómicos.</p>
+
+  {recetas.length === 0 ? (
+    <p class="sin-recetas">No hay recetas aún. ¡Crea tu primera receta en <code>src/content/recetas/</code>!</p>
+  ) : (
+    <div class="recetas-grid">
+      {recetas.map((receta) => (
+        <a href={`/recetas/${receta.id}`} class="receta-card">
+          <div class="receta-info">
+            <h2>{receta.data.title}</h2>
+            {receta.data.description && <p class="receta-desc-card">{receta.data.description}</p>}
+            <div class="receta-chips">
+              {receta.data.tiempo && <span class="chip">⏱ {receta.data.tiempo}</span>}
+              {receta.data.porciones && <span class="chip">🍽 {receta.data.porciones}</span>}
+              {receta.data.dificultad && <span class="chip">📊 {receta.data.dificultad}</span>}
+            </div>
+            <span class="receta-fecha">{receta.data.pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
 </Base>
+
+<style>
+  h1 {
+    margin-bottom: 0.3rem;
+  }
+  .recetas-desc {
+    color: #888;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+  .recetas-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .receta-card {
+    display: block;
+    padding: 1.2rem 1.4rem;
+    border: 3px solid var(--fg, #111);
+    border-radius: 0.9rem;
+    text-decoration: none;
+    color: var(--fg, #111);
+    box-shadow: 4px 4px 0 var(--fg, #111);
+    transition: box-shadow 0.15s;
+  }
+  .receta-card:hover {
+    box-shadow: 2px 2px 0 var(--fg, #111);
+  }
+  .receta-card h2 {
+    margin: 0 0 0.3rem;
+    font-size: 1.15rem;
+  }
+  .receta-desc-card {
+    margin: 0 0 0.7rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .receta-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+  }
+  .chip {
+    background: var(--fg, #111);
+    color: var(--bg, #fff);
+    border-radius: 2rem;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .receta-fecha {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  .sin-recetas {
+    color: #888;
+    font-style: italic;
+  }
+  .sin-recetas code {
+    background: #f0f0f0;
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+</style>

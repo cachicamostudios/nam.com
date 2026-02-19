@@ -1,0 +1,130 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const recetas = await getCollection('recetas');
+  return recetas.map((receta) => ({
+    params: { slug: receta.id },
+    props: receta,
+  }));
+}
+
+type Props = CollectionEntry<'recetas'>;
+
+const receta = Astro.props;
+const { Content } = await render(receta);
+const { title, description, pubDate, updatedDate, porciones, tiempo, dificultad } = receta.data;
+---
+
+<Base title={`${title} | ñam.com`}>
+  <article class="receta">
+    <div class="receta-header">
+      <a href="/recetas" class="btn-volver">← Volver a recetas</a>
+      <h1>{title}</h1>
+      {description && <p class="receta-desc">{description}</p>}
+
+      <div class="receta-meta">
+        {tiempo && (
+          <span class="meta-chip">⏱ {tiempo}</span>
+        )}
+        {porciones && (
+          <span class="meta-chip">🍽 {porciones}</span>
+        )}
+        {dificultad && (
+          <span class="meta-chip">📊 {dificultad}</span>
+        )}
+        <span class="meta-chip meta-fecha">
+          📅 {pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </span>
+      </div>
+      <hr />
+    </div>
+
+    <div class="receta-contenido">
+      <Content />
+    </div>
+
+    {updatedDate && (
+      <p class="actualizado">Actualizado: {updatedDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+    )}
+  </article>
+</Base>
+
+<style>
+  .receta {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .btn-volver {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--fg, #111);
+    font-size: 1rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .btn-volver:hover {
+    text-decoration: underline;
+  }
+  h1 {
+    margin: 0.3rem 0 0.5rem;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  .receta-desc {
+    color: #666;
+    font-size: 1.05rem;
+    margin: 0 0 1rem;
+  }
+  .receta-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .meta-chip {
+    background: var(--fg, #111);
+    color: var(--bg, #fff);
+    border-radius: 2rem;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .meta-fecha {
+    background: #888;
+  }
+  hr {
+    border: none;
+    border-top: 3px solid var(--fg, #111);
+    margin: 1.2rem 0 1.8rem;
+  }
+  .receta-contenido {
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+  /* Estilos para el contenido Markdown de la receta */
+  .receta-contenido h2 {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    border-bottom: 2px solid var(--fg, #111);
+    padding-bottom: 0.3rem;
+  }
+  .receta-contenido h3 {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+  }
+  .receta-contenido ul,
+  .receta-contenido ol {
+    padding-left: 1.5rem;
+  }
+  .receta-contenido li {
+    margin-bottom: 0.4rem;
+  }
+  .actualizado {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+  }
+</style>
