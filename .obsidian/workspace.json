@@ -20,23 +20,8 @@
               "icon": "lucide-file",
               "title": "ejemplo-receta"
             }
-          },
-          {
-            "id": "376f1e78d3d8f7de",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "src/content/blog/Prueba de receta.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Prueba de receta"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/blog/Prueba de receta.md",
+                "file": "src/content/recetas/ejemplo-receta.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Prueba de receta"
+              "title": "Backlinks for ejemplo-receta"
             }
           },
           {
@@ -128,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/blog/Prueba de receta.md",
+                "file": "src/content/recetas/ejemplo-receta.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Prueba de receta"
+              "title": "Outgoing links from ejemplo-receta"
             }
           },
           {
@@ -171,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/blog/Prueba de receta.md",
+                "file": "src/content/recetas/ejemplo-receta.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Prueba de receta"
+              "title": "Outline of ejemplo-receta"
             }
           }
         ]
@@ -199,21 +184,22 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "376f1e78d3d8f7de",
+  "active": "12aa2cc8b18210a7",
   "lastOpenFiles": [
+    "src/content/recetas/prueba-de-receta.md",
     "src/content/recetas/ejemplo-receta.md",
+    "dist/recetas/prueba-de-receta/index.html",
+    "dist/recetas/prueba-de-receta",
+    "dist/pages/rss.xml.astro.mjs",
+    "dist/pages/recetas.astro.mjs",
+    "dist/pages/recetas",
+    "dist/pages/index.astro.mjs",
+    "dist/pages/galeria.astro.mjs",
+    "dist/pages/galeria",
+    "dist/pages/blog.astro.mjs",
+    "dist/pages/blog",
     "src/content/blog/Prueba de receta.md",
     "src/content/blog/chichalovers.md",
-    "dist/recetas/ejemplo-receta/index.html",
-    "dist/recetas/ejemplo-receta",
-    "src/pages/recetas/[...slug].astro",
-    "src/pages/recetas",
-    "src/content/recetas",
-    "dist/blog/a-dmaria-la-pulperia/index.html",
-    "dist/blog/a-dmaria-la-pulperia",
-    "dist/blog/test/index.html",
-    "dist/blog/test",
-    "dist/blog/index.html",
     "dist/_astro/blog-placeholder-1.Bx0Zcyzv.jpg",
     "dist/telegram-logo.svg",
     "dist/nam-logo-brutalista-2.svg",
