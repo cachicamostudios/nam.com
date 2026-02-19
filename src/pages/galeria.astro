@@ -1,8 +1,76 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+// Obtener posts que tienen galería asociada
+const posts = await getCollection('blog');
+const postsConGaleria = posts
+  .filter(post => post.data.galeria)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Base title="Galería | ñam.com">
-  <h1>Galería</h1>
-  <p>Explora la galería de imágenes y experiencias de ñam.com.</p>
+  <h1>📷 Galería</h1>
+  <p class="galeria-desc">Explora las fotos de cada experiencia.</p>
+
+  {postsConGaleria.length === 0 ? (
+    <p class="sin-galerias">No hay galerías aún.</p>
+  ) : (
+    <div class="galerias-grid">
+      {postsConGaleria.map((post) => (
+        <a href={`/galeria/${post.data.galeria}`} class="galeria-card">
+          <span class="galeria-emoji">📷</span>
+          <span class="galeria-title">{post.data.title}</span>
+          <span class="galeria-date">{post.data.pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </a>
+      ))}
+    </div>
+  )}
 </Base>
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  .galeria-desc {
+    color: #888;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+  .galerias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .galeria-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.2rem 1.2rem 1rem 1.2rem;
+    border: 3px solid var(--fg, #111);
+    border-radius: 0.9rem;
+    text-decoration: none;
+    color: var(--fg, #111);
+    box-shadow: 4px 4px 0 var(--fg, #111);
+    transition: box-shadow 0.15s;
+  }
+  .galeria-card:hover {
+    box-shadow: 2px 2px 0 var(--fg, #111);
+  }
+  .galeria-emoji {
+    font-size: 2rem;
+  }
+  .galeria-title {
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+  .galeria-date {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  .sin-galerias {
+    color: #888;
+    font-style: italic;
+  }
+</style>
