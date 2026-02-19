@@ -2,10 +2,10 @@
 import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
 
-// Ordenar por fecha descendente (más nuevo primero)
+// Ordenar por fecha descendente (más nuevo primero) y mostrar solo 5
 const sortedPosts = posts.sort(
   (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
-);
+).slice(0, 5);
 ---
 
 <html lang="es">
