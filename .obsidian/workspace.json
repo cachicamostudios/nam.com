@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/chichalovers.md",
+                "file": "src/content/recetas/ejemplo-receta.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "chichalovers"
+              "title": "ejemplo-receta"
+            }
+          },
+          {
+            "id": "376f1e78d3d8f7de",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/Prueba de receta.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Prueba de receta"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -94,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/blog/chichalovers.md",
+                "file": "src/content/blog/Prueba de receta.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for chichalovers"
+              "title": "Backlinks for Prueba de receta"
             }
           },
           {
@@ -113,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/blog/chichalovers.md",
+                "file": "src/content/blog/Prueba de receta.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from chichalovers"
+              "title": "Outgoing links from Prueba de receta"
             }
           },
           {
@@ -156,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/blog/chichalovers.md",
+                "file": "src/content/blog/Prueba de receta.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of chichalovers"
+              "title": "Outline of Prueba de receta"
             }
           }
         ]
@@ -184,20 +199,22 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "12aa2cc8b18210a7",
+  "active": "376f1e78d3d8f7de",
   "lastOpenFiles": [
+    "src/content/recetas/ejemplo-receta.md",
+    "src/content/blog/Prueba de receta.md",
+    "src/content/blog/chichalovers.md",
+    "dist/recetas/ejemplo-receta/index.html",
+    "dist/recetas/ejemplo-receta",
+    "src/pages/recetas/[...slug].astro",
+    "src/pages/recetas",
+    "src/content/recetas",
     "dist/blog/a-dmaria-la-pulperia/index.html",
     "dist/blog/a-dmaria-la-pulperia",
     "dist/blog/test/index.html",
     "dist/blog/test",
     "dist/blog/index.html",
-    "dist/archivo/index.html",
-    "dist/archivo",
-    "dist/about/index.html",
-    "dist/about",
     "dist/_astro/blog-placeholder-1.Bx0Zcyzv.jpg",
-    "dist/_astro",
-    "dist/sitemap-index.xml",
     "dist/telegram-logo.svg",
     "dist/nam-logo-brutalista-2.svg",
     "dist/logo.svg",
@@ -207,7 +224,6 @@
     "dist/galeria/chichalovers/foto2.jpeg",
     "dist/galeria/chichalovers/foto1.jpeg",
     "dist/favicon-48.png",
-    "src/content/blog/Test.md",
-    "src/content/blog/Untitled.md"
+    "src/content/blog/Test.md"
   ]
 }
