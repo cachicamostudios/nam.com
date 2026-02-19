@@ -26,16 +26,16 @@ const { title, description, pubDate, updatedDate, porciones, tiempo, dificultad 
 
       <div class="receta-meta">
         {tiempo && (
-          <span class="meta-chip">⏱ {tiempo}</span>
+          <span class="meta-chip">{tiempo}</span>
         )}
         {porciones && (
-          <span class="meta-chip">🍽 {porciones}</span>
+          <span class="meta-chip">{porciones}</span>
         )}
         {dificultad && (
-          <span class="meta-chip">📊 {dificultad}</span>
+          <span class="meta-chip">{dificultad}</span>
         )}
         <span class="meta-chip meta-fecha">
-          📅 {pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+          {pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
         </span>
       </div>
       <hr />

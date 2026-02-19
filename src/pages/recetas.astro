@@ -8,7 +8,7 @@ const recetas = (await getCollection('recetas')).sort(
 ---
 
 <Base title="Recetas | ñam.com">
-  <h1>🍳 Recetas</h1>
+  <h1>Recetas</h1>
   <p class="recetas-desc">Recopilación de recetas deliciosas y experimentos gastronómicos.</p>
 
   {recetas.length === 0 ? (
@@ -21,9 +21,9 @@ const recetas = (await getCollection('recetas')).sort(
             <h2>{receta.data.title}</h2>
             {receta.data.description && <p class="receta-desc-card">{receta.data.description}</p>}
             <div class="receta-chips">
-              {receta.data.tiempo && <span class="chip">⏱ {receta.data.tiempo}</span>}
-              {receta.data.porciones && <span class="chip">🍽 {receta.data.porciones}</span>}
-              {receta.data.dificultad && <span class="chip">📊 {receta.data.dificultad}</span>}
+              {receta.data.tiempo && <span class="chip">{receta.data.tiempo}</span>}
+              {receta.data.porciones && <span class="chip">{receta.data.porciones}</span>}
+              {receta.data.dificultad && <span class="chip">{receta.data.dificultad}</span>}
             </div>
             <span class="receta-fecha">{receta.data.pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </div>
